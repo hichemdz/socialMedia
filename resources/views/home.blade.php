@@ -17,31 +17,7 @@
     </head>
     <body class="antialiased">
 
-        <header>
-            <nav class="bg-blue-500 text-white">
-                <div class="container py-3 flex m-auto items-center justify-between">
-                    <a href="#">logo</a>
-                    <ul class="flex">
-                        <li class='mx-2' ><a href="">home</a></li>
-                        <li class='mx-2'><a href="">home</a></li>
-
-                        @auth
-                        <li class='mx-2'><a href="">
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-green-300  font-black ">Dashboard</a> 
-                            </a>
-                        </li>
-                        
-                        @else
-                        
-                        <li class='mx-2'><a href="">
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-                        </a></li>
-                        <li class='mx-2'><a href="">home</a></li>
-                        @endif
-                    </ul>    
-                </div>
-            </nav>
-        </header>
+        @include('header')
         <div class="content">
             <div class="container m-auto">
                 <div class="grid grid-cols-3 gap-4">

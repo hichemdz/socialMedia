@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MassengerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +15,15 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/',[HomeController::class,'index']);
-Route::get('profile/{id}',[HomeController::class,'show']);
+Route::get('profile/{id?}',[HomeController::class,'show']);
 Route::post('profile/',[HomeController::class,'request_friend']);
+//Route::get('massenger/{id}',[HomeController::class,'message']);
+
+Route::resource('massengers',MassengerController::class);
+
+
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

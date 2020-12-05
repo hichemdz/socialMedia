@@ -1,3 +1,28 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+body{
+    
+    background: #282425;
+}
+
+main{
+    background: linear-gradient(to top, #242526, rgba(36,37,38,.9), rgba(36,37,38,.7), rgba(36,37,38,.4), rgba(36,37,38,0));
+
+}
+.inner_main{
+    width: 900px;
+    
+}
+
+.cover{
+    padding-top: 39%;
+}
+
+.inner_chat{
+    height:450px;
+    width: 303px;
+    right: 20px;
+}

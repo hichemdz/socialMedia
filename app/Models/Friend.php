@@ -11,4 +11,5 @@ class Friend extends Model
 
     protected $primaryKey = ['user_send', 'user_request'];
     public $incrementing = false;
+    protected $fillable = ['user_send','user_request'];
 }
