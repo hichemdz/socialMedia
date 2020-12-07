@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [];
+
+     public function user()
+     {
+         return $this->belongsTo('App\Models\User');
+     }
+
+     public function phots()
+     {
+         return $this->hasMany('App\Models\PhotoProfile');
+     }
+    
 }

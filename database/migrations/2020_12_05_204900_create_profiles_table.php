@@ -15,14 +15,14 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('lname', 40);
-            $table->string('fname', 25);
+            $table->string('lname', 40)->nullable();
+            $table->string('fname', 25)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('live');
-            $table->string('work');
-            $table->string('study');
-            $table->date('birthday');
+            $table->string('live')->nullable();
+            $table->string('work')->nullable();
+            $table->string('study')->nullable();
+            $table->date('birthday')->nullable();
             $table->timestamps();
         });
     }

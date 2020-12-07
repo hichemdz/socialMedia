@@ -4,7 +4,7 @@
 
 
 body{
-    
+
     background: #282425;
 }
 
@@ -14,11 +14,11 @@ main{
 }
 .inner_main{
     width: 900px;
-    
+
 }
 
 .cover{
-    padding-top: 39%;
+    padding-top: 28%;
 }
 
 .inner_chat{

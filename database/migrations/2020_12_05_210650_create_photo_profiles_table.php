@@ -17,7 +17,7 @@ class CreatePhotoProfilesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade');
-            $table->enum('choices', ['c', 'p']);
+            $table->enum('type', ['c', 'p']);
             $table->string('path');
             $table->timestamps();
         });

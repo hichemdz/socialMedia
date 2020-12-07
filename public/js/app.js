@@ -19343,6 +19343,12 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+__webpack_require__(/*! ./profile */ "./resources/js/profile.js");
+
+__webpack_require__(/*! ./upload */ "./resources/js/upload.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -19374,6 +19380,41 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/profile.js":
+/*!*********************************!*\
+  !*** ./resources/js/profile.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var edit_file = document.querySelectorAll('.edidt_file_profile');
+var file_editor = document.querySelector('#file_editor');
+var type_input_profile = document.querySelector('#type_input_profile');
+var close = document.querySelector('#close');
+Object.values(edit_file).map(function (b) {
+  b.addEventListener('click', function () {
+    console.log(b.dataset.type);
+    type_input_profile.value = b.dataset.type === 'cover' ? 'c' : 'p';
+    file_editor.classList.toggle('hidden');
+  });
+});
+close.addEventListener('click', function () {
+  file_editor.classList.add('hidden');
+});
+
+/***/ }),
+
+/***/ "./resources/js/upload.js":
+/*!********************************!*\
+  !*** ./resources/js/upload.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

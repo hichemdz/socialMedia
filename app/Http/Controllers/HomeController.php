@@ -21,6 +21,7 @@ class HomeController extends Controller
           
         $user = User::find($id);
         
+        
         $id_login = \Auth::user() ?  \Auth::user()->id : null;
            
         $freind =  Friend::whereIn('user_send', [$user->id,$id_login])

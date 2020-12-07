@@ -8,25 +8,28 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-   
-       
+
+
        <link rel="stylesheet" href="{{asset('/css/app.css')}}">
-       
+
 
 
     </head>
     <body class="antialiased ">
-        
+
        @include('header')
-    
-     @section('main')      
-          
-     @show  
-    
-     @section('content')
-    
+
+     @section('main')
+
      @show
-       
-        
+
+     @section('content')
+
+     @show
+
+     @section('script')
+         <script src="{{asset('js/app.js')}}"></script>
+     @show
+
     </body>
 </html>
