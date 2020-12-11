@@ -8,12 +8,12 @@ use App\Http\Controllers\Auth\AuthintcationUserController;
 use App\Http\Controllers\FriendController;
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| site Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register site routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "site" middleware group. Now create something great!
 |
 */
 

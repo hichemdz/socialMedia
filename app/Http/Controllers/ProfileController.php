@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Friend;
 use App\Models\Profile;
 use App\Models\PhotoProfile;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfileController extends Controller
 {
@@ -16,7 +19,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-         echo 'index';
+        $id =  $id_login = \Auth::user() ?  \Auth::user()->id : null;
+        $route = $id?  redirect('/profile/'.$id): redirect('login');
+        return $route;
     }
 
     /**
@@ -37,43 +42,68 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-           #mimes:jpeg,jpg,png,gif|required|max:50000
-        $request->validate([
-            'path' => 'required|image',
-            'type' => 'required',
-            'profile_id' => 'required',
+
+        #mimes:jpeg,jpg,png,gif|required|max:50000
+
+
+
+        // ajax
+        if($request->ajax()) {
+            $input = $request->all();
+            $type = $input['type'] == 'c'?'cover':'profile';
+            //convert
+            $image_pres = explode(';base64,', $input['path']);
+            $ex = explode('image/',$image_pres[0])[1];
+            $input['path'] = $type.'/'.$type.'_'. time().$ex;
+            $image_bas64 = base64_decode($image_pres[1]);
+
+            //validate
+            $request->validate([
+                'path' => 'required:image',
+                'type' => 'required',
+                'profile_id' => 'required',
             ]);
 
-        $input = $request->all();
 
 
-        if($input['type'] == 'p' ){
-            $type = 'photo';
-        }else{
-            $type = 'cover';
+            Storage::put('public/front/profile/'. $input['path'],$image_bas64);
+
+            PhotoProfile::create($input);
+
+            if($input['type'] == 'c'){
+                $context = ['cover'=>$input['path']];
+                $template = 'front.profile.include.backgroundCover';
+            }else{
+                $context = ['photo'=>$input['path']];
+                $template = 'front.profile.include.backgroundPhoto';
+            }
+
+            return view($template , $context)->render();
+
         }
 
-
-        $file = $request->file('path');
-
-        $ext = $file->getClientOriginalExtension();
-
-        $request->file('path')->storeAs('public/front/profile/'.$type,$type.'_'. time().'.'.$ext);
-
-
-        $input['path'] = $type.'/'.$type.'_'. time().'.'.$ext;
-
-
-        $u = public_path('storage/front/profile/'. $input['path'] );
-
-
-        //$img = Image::make($u)->resize(911, 351);
-        $img = Image::make($u) ; //->crop(911, 351);
-        return dump($img->filesize());
-        $img->save();
-        PhotoProfile::create($input);
-
-        return back();
+//
+//
+//        $file = $request->file('path');
+//
+//        $ext = $file->getClientOriginalExtension();
+//
+//        $request->file('path')->storeAs('public/front/profile/'.$type,$type.'_'. time().'.'.$ext);
+//
+//
+//        $input['path'] = $type.'/'.$type.'_'. time().'.'.$ext;
+//
+//
+//        $u = public_path('storage/front/profile/'. $input['path'] );
+//
+//
+//        //$img = Image::make($u)->resize(911, 351);
+////        $img = Image::make($u) ; //->crop(911, 351);
+////        return dump($img->filesize());
+////        $img->save();
+//        PhotoProfile::create($input);
+//
+//        return back();
     }
 
     /**
@@ -82,17 +112,28 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show($profile)
+    public function show($id)
     {
-       $profile =  Profile::find($profile)->first(); //  data profile
-       $user =  $profile->user;
-       $photo = $profile->phots->where('type','=','p')->sortByDesc(function($a,$b){
-             return strtotime($a['updated_at']);
-        })->first()->path; // path photo
-       $cover = $profile->phots->where('type','=','c')->sortByDesc(function($a,$b){
-            return strtotime($a['updated_at']);
-       })->first()->path; // path cover
-       return view('profile', ['cover'=>$cover,'photo'=>$photo,'profile'=> $profile,'user'=>$user]);
+        $profile =  Profile::find($id); //  data profile
+        $id_login = \Auth::user() ?  \Auth::user()->id : null;
+        if(!$profile ){
+            return  redirect('profile');
+        }
+//
+
+        $user =  $profile->user;
+
+
+
+        $friend = Friend::whereIn('user_send', [$user->id,$id_login])
+            ->whereIn('user_request', [$user->id,$id_login])
+            ->limit(1)->get();
+
+       $image_photo  = pict($id);
+       $image_cover  = cover($id);
+
+       $context = ['cover'=>$image_cover,'photo'=>$image_photo,'profile'=>$profile,'user'=>$user,'friend'=>$friend ];
+       return view('front.profile.profile', $context);
     }
 
     /**

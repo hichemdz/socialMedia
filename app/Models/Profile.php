@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [];
 
      public function user()
@@ -16,9 +16,14 @@ class Profile extends Model
          return $this->belongsTo('App\Models\User');
      }
 
-     public function phots()
+     public function photos()
      {
          return $this->hasMany('App\Models\PhotoProfile');
      }
-    
+
+
+
+
+
+
 }

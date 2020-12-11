@@ -19391,18 +19391,90 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (function(module, exports) {
 
 var edit_file = document.querySelectorAll('.edidt_file_profile');
-var file_editor = document.querySelector('#file_editor');
-var type_input_profile = document.querySelector('#type_input_profile');
+var file_editor = document.querySelector('#file_editor'); //const type = document.querySelector('#type');
+
 var close = document.querySelector('#close');
-Object.values(edit_file).map(function (b) {
-  b.addEventListener('click', function () {
-    console.log(b.dataset.type);
-    type_input_profile.value = b.dataset.type === 'cover' ? 'c' : 'p';
-    file_editor.classList.toggle('hidden');
-  });
-});
+var profile_id = document.querySelector('#profile_id');
+var path = null;
 close.addEventListener('click', function () {
   file_editor.classList.add('hidden');
+  document.querySelector('#photo_profile_form').reset();
+}); // image upload
+
+var fileUpload = document.querySelector('#file');
+var btn = document.querySelector('#submitData');
+
+fileUpload.onchange = function (e) {
+  var file = e.target.files[0];
+  resizeAndUpload(file);
+};
+
+function resizeAndUpload(file) {
+  var reader = new FileReader();
+
+  reader.onloadend = function () {
+    var tempImg = new Image();
+    tempImg.src = reader.result;
+
+    tempImg.onload = function () {
+      var MAX_WIDTH = 1440; // you can keep any width you want
+
+      var MAX_HEIGHT = 960; // you can keep any height you want
+
+      var tempW = tempImg.width;
+      var tempH = tempImg.height; //calculating the ratio of width that needs to be resized.
+      //resizing the height in the same ratio as width.
+
+      if (tempW > MAX_WIDTH) {
+        var ratio = tempW / MAX_WIDTH;
+        tempW = parseInt(tempW / ratio);
+        tempH = parseInt(tempH / ratio);
+      } else {
+        if (tempH > MAX_HEIGHT) {
+          var ratio = tempW / MAX_HEIGHT;
+          tempW = parseInt(tempW / ratio);
+          tempH = parseInt(tempH / ratio);
+        }
+      }
+
+      var canvas = document.createElement('canvas');
+      canvas.width = tempW;
+      canvas.height = tempH;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(this, 0, 0, tempW, tempH);
+      var dataURL = canvas.toDataURL("image/jpeg");
+      document.querySelector('img').src = dataURL;
+      path = dataURL;
+    };
+  };
+
+  reader.readAsDataURL(file);
+}
+
+Object.values(edit_file).map(function (b) {
+  b.addEventListener('click', function () {
+    type = b.dataset.type.trim() === 'cover' ? 'c' : 'p';
+    file_editor.classList.toggle('hidden'); //
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var profile_id = file_editor.dataset.id;
+      axios.post('/profile', {
+        path: path,
+        type: type,
+        profile_id: profile_id
+      }).then(function (res) {
+        ///storage/front/profile/
+        // console.log(res.data)
+        console.log(type);
+        if (type == 'p') document.querySelector('#photo_profile').innerHTML = res.data;
+        if (type == 'c') document.querySelector('#photo_cover').innerHTML = res.data;
+        close.click();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    });
+  });
 });
 
 /***/ }),
