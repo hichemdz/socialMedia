@@ -1,7 +1,11 @@
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+:root{
+    --bg-rgba-black-6:rgba(0, 0, 0, 0.6);;
+   }
 
 body{
 
@@ -9,15 +13,38 @@ body{
 }
 
 
+/* global*/
+
+header{
+    z-index: 99999999 !import;
+}
+
+.bg-rgba-b-6{
+    background: var(--bg-rgba-black-6) ;
+}
+
+/*global*/
+
 /* Home */
 
 .time_publish{
     margin-top: -5px !important
 }
+.inner_type_publish{
+    
+}
 
 
+/* posts */
+
+.inner_post_photos{
+    max-height: 460px;
+}
+
+/* posts */
 
 
+/* profile */
 
 main{
     background: linear-gradient(to top, #242526, rgba(36,37,38,.9), rgba(36,37,38,.7), rgba(36,37,38,.4), rgba(36,37,38,0));
@@ -32,7 +59,8 @@ main{
     background: #292b2c;
 }
 .cover{
-    padding-top: 33%;
+    
+    padding-top: 38%;
 }
 
 .inner_chat{
@@ -49,4 +77,51 @@ main{
 
 .content{
     background: #202224;
+}
+
+.type_publish li{
+   cursor: pointer;
+}
+
+#add_post{
+  animation-name: example;
+}
+#list_publish{
+  animation-name: example2;
+}
+
+#add_post,#list_publish {
+  
+  animation-duration: .1s;
+}
+
+@keyframes example {
+  from {transform:translateX(-100px);}
+  to {transform:translateX(0px) }
+}
+
+@keyframes example2 {
+  from {transform:translateX(100px);}
+  to {transform:translateX(0px) }
+}
+
+.overfaly{
+    background: rgba(0,0,0,0.5)
+}
+
+.option {
+    top: 60px;
+    width: 306px;
+    right:10px; 
+    overflow: hidden;
+    animation-name: option;
+    animation-duration: 1s;
+    transition: height 1s;
+   
+
+}
+
+@keyframes option {
+  from {height: 0}
+  to {height: auto }
 }

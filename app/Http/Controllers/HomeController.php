@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Friend;
+use App\Models\Post;
 use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
     public function index()
     {
-
+     
         $id_login = \Auth::user() ?  \Auth::user()->id : null;
         $users = User::where('id' ,'!=', $id_login )->get();
-        return View('front.home.home',compact('users'));
+        $posts = Post::all();
+        return View('front.home.home',['users'=>$users,'posts'=>$posts]);
     }
+
+
 
     public function show($id=null)
     {  $id = $id != null? $id: \Auth::user()->id;

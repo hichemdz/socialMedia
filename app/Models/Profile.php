@@ -21,7 +21,12 @@ class Profile extends Model
          return $this->hasMany('App\Models\PhotoProfile');
      }
 
-
+     
+     public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    
+    }
 
 
 

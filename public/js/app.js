@@ -19345,9 +19345,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
+__webpack_require__(/*! ./header */ "./resources/js/header.js");
+
 __webpack_require__(/*! ./profile */ "./resources/js/profile.js");
 
 __webpack_require__(/*! ./upload */ "./resources/js/upload.js");
+
+__webpack_require__(/*! ./posts */ "./resources/js/posts.js");
 
 /***/ }),
 
@@ -19383,6 +19387,81 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/header.js":
+/*!********************************!*\
+  !*** ./resources/js/header.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var openOption = document.querySelector('#openOption');
+var optiom = document.querySelector('.option');
+openOption.addEventListener('click', function (e) {
+  e.preventDefault();
+  optiom.classList.toggle('hidden');
+});
+
+/***/ }),
+
+/***/ "./resources/js/posts.js":
+/*!*******************************!*\
+  !*** ./resources/js/posts.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var toggPList = document.querySelector("#toggler_publish_list"); //
+
+var addPost = document.querySelector("#add_post"); // 
+
+var listPublish = document.querySelector("#list_publish"); // 
+
+var backToPublish = document.querySelector("#back_to_publish"); //
+
+var openCreatePost = document.querySelector("#open_create_post"); //
+
+var type_publish = document.querySelectorAll("#type_publish li"); //
+
+/* --------------------------------------------------------------- */
+
+var upload_file = document.querySelector("#upload_file");
+toggPList.addEventListener('click', function () {
+  addPost.style.display = 'none';
+  listPublish.style.display = 'flex';
+});
+backToPublish.addEventListener('click', function () {
+  addPost.style.display = 'block';
+  listPublish.style.display = 'none';
+});
+openCreatePost.addEventListener('click', function () {
+  file_editor.classList.toggle('hidden');
+});
+
+var upload = function upload(btnNam, nameFile) {
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'file';
+  btnNam.addEventListener('click', function (e) {
+    e.preventDefault();
+    var file = document.createElement('input');
+    file.type = type;
+    file.name = nameFile;
+    file.multiple = true;
+    file.style.display = 'none';
+    document.querySelector("#form_post").appendChild(file);
+    file.click();
+  });
+};
+
+upload(upload_file, 'photos[]'); // chnage type 
+
+Object.values(type_publish).map(function (ele, k) {
+  var privacy = ['Public', 'Friends', 'Only'];
+  ele.addEventListener('click', function () {
+    document.getElementsByName('privacy').value = privacy[k];
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/profile.js":
 /*!*********************************!*\
   !*** ./resources/js/profile.js ***!
@@ -19395,85 +19474,80 @@ var file_editor = document.querySelector('#file_editor'); //const type = documen
 
 var close = document.querySelector('#close');
 var profile_id = document.querySelector('#profile_id');
-var path = null;
+var path = null; // close Upload
+
 close.addEventListener('click', function () {
   file_editor.classList.add('hidden');
-  document.querySelector('#photo_profile_form').reset();
+  document.querySelector('form').reset();
 }); // image upload
 
 var fileUpload = document.querySelector('#file');
-var btn = document.querySelector('#submitData');
-
-fileUpload.onchange = function (e) {
-  var file = e.target.files[0];
-  resizeAndUpload(file);
-};
-
-function resizeAndUpload(file) {
-  var reader = new FileReader();
-
-  reader.onloadend = function () {
-    var tempImg = new Image();
-    tempImg.src = reader.result;
-
-    tempImg.onload = function () {
-      var MAX_WIDTH = 1440; // you can keep any width you want
-
-      var MAX_HEIGHT = 960; // you can keep any height you want
-
-      var tempW = tempImg.width;
-      var tempH = tempImg.height; //calculating the ratio of width that needs to be resized.
-      //resizing the height in the same ratio as width.
-
-      if (tempW > MAX_WIDTH) {
-        var ratio = tempW / MAX_WIDTH;
-        tempW = parseInt(tempW / ratio);
-        tempH = parseInt(tempH / ratio);
-      } else {
-        if (tempH > MAX_HEIGHT) {
-          var ratio = tempW / MAX_HEIGHT;
-          tempW = parseInt(tempW / ratio);
-          tempH = parseInt(tempH / ratio);
-        }
-      }
-
-      var canvas = document.createElement('canvas');
-      canvas.width = tempW;
-      canvas.height = tempH;
-      var ctx = canvas.getContext("2d");
-      ctx.drawImage(this, 0, 0, tempW, tempH);
-      var dataURL = canvas.toDataURL("image/jpeg");
-      document.querySelector('img').src = dataURL;
-      path = dataURL;
-    };
-  };
-
-  reader.readAsDataURL(file);
-}
+var btn = document.querySelector('#submitData'); // fileUpload.onchange = (e)=>{
+//     var file = e.target.files[0];
+//
+//     resizeAndUpload(file);
+// }
+// function resizeAndUpload(file) {
+//     var reader = new FileReader();
+//     reader.onloadend = function () {
+//         var tempImg = new Image();
+//         tempImg.src = reader.result;
+//         tempImg.onload = function () {
+//             var MAX_WIDTH = 1440; // you can keep any width you want
+//             var MAX_HEIGHT = 960;  // you can keep any height you want
+//
+//             var tempW = tempImg.width;
+//             var tempH = tempImg.height;
+//
+//             //calculating the ratio of width that needs to be resized.
+//             //resizing the height in the same ratio as width.
+//             if (tempW > MAX_WIDTH) {
+//                 var ratio = tempW / MAX_WIDTH;
+//                 tempW = parseInt(tempW / ratio);
+//                 tempH = parseInt(tempH / ratio);
+//             }
+//             else {
+//                 if (tempH > MAX_HEIGHT) {
+//                     var ratio = tempW / MAX_HEIGHT;
+//                     tempW = parseInt(tempW / ratio);
+//                     tempH = parseInt(tempH / ratio);
+//                 }
+//             }
+//
+//             var canvas = document.createElement('canvas');
+//             canvas.width = tempW;
+//             canvas.height = tempH;
+//             var ctx = canvas.getContext("2d");
+//             ctx.drawImage(this, 0, 0, tempW, tempH);
+//             var dataURL = canvas.toDataURL("image/jpeg");
+//             document.querySelector('img').src= dataURL;
+//             path = dataURL;
+//         }
+//     }
+//     reader.readAsDataURL(file);
+// }
 
 Object.values(edit_file).map(function (b) {
+  var errors;
   b.addEventListener('click', function () {
     type = b.dataset.type.trim() === 'cover' ? 'c' : 'p';
+    document.querySelector('#type_form_profile').value = type;
     file_editor.classList.toggle('hidden'); //
-
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      var profile_id = file_editor.dataset.id;
-      axios.post('/profile', {
-        path: path,
-        type: type,
-        profile_id: profile_id
-      }).then(function (res) {
-        ///storage/front/profile/
-        // console.log(res.data)
-        console.log(type);
-        if (type == 'p') document.querySelector('#photo_profile').innerHTML = res.data;
-        if (type == 'c') document.querySelector('#photo_cover').innerHTML = res.data;
-        close.click();
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    });
+    // btn.addEventListener('click', (e)=>{
+    //     e.preventDefault();
+    //     let profile_id = file_editor.dataset.id;
+    //     axios.post('/profile',{path,type,profile_id})
+    //         .then(res=>{
+    //          console.log(res.data);
+    //
+    //             if(type =='p') document.querySelector('#photo_profile').innerHTML = res.data;
+    //             if(type =='c') document.querySelector('#photo_cover').innerHTML = res.data;
+    //
+    //             close.click();
+    //
+    //         }).catch(err=> console.log(err) )
+    //
+    // })
   });
 });
 

@@ -12,4 +12,13 @@ class Friend extends Model
     protected $primaryKey = ['user_send', 'user_request'];
     public $incrementing = false;
     protected $fillable = ['user_send','user_request'];
+
+    public function user()
+    {   
+        return $this->belongsTo('App\Models\User','user_request');
+    }
+    public function user_send()
+    {   
+        return $this->belongsTo('App\Models\User','user_send');
+    }
 }

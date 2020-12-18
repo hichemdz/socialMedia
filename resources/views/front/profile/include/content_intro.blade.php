@@ -1,5 +1,5 @@
-<div class="bg-sub  p-4 mb-2 rounded">
-    <div class="flex mb-2">
+
+<div class="flex mb-2">
         <h4 class="text-white font-black text-xl ">Intro</h4>
     </div>
     <ul>
@@ -36,4 +36,3 @@
         @endif
 
     </ul>
-</div>

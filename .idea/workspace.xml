@@ -2,51 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbe37efd-110d-47cb-942a-f881191879e6" name="Default Changelist" comment="profile javascript">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/FriendController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/004-joy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/005-thinking.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/006-scared.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/angry.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/sad.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/thumb-up.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/emoji/very_happy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/components/posts/create_post.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/components/posts/include/post_content.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/components/posts/include/post_footer.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/components/posts/include/post_header.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/components/posts/post.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/home/home.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/home/include/content_aside_left.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/home/include/content_aside_right.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/home/include/content_contents.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/action.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/backgroundCover.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/backgroundPhoto.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/content_friends.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/content_intro.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/content_photo.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/main_upload.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/site.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/StoreProfileRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/laravellocalization.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/front/profile/include/eroors.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PhotoProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/PhotoProfile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/upload.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/base.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/file.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/file.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/massenger.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/massenger.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/profile/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,6 +153,8 @@
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/astrotomic/laravel-translatable" />
+      <path value="$PROJECT_DIR$/vendor/mcamara/laravel-localization" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lK7OeRI0rpV9oZ9dAlcwOt06Am" />
@@ -243,7 +212,8 @@
       <workItem from="1607547439484" duration="7127000" />
       <workItem from="1607615347202" duration="1234000" />
       <workItem from="1607619845602" duration="9369000" />
-      <workItem from="1607673801893" duration="1310000" />
+      <workItem from="1607673801893" duration="3325000" />
+      <workItem from="1607694776273" duration="7923000" />
     </task>
     <servers />
   </component>
@@ -264,6 +234,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="484" y="68" width="387" height="624" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1607424013904" />
+    <state x="403" y="8" width="541" height="738" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607696608060">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="403" y="8" width="541" height="738" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.768@0.0.1366.768" timestamp="1607696608060" />
     <state x="416" y="141" width="524" height="478" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1607458788979">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -272,6 +246,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="281" y="0" width="794" height="762" key="CommitChangelistDialog2/0.0.1366.768@0.0.1366.768" timestamp="1607342114119" />
+    <state x="258" y="182" width="471" height="536" key="NewPhpClassDialog" timestamp="1607696240207">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="258" y="182" width="471" height="536" key="NewPhpClassDialog/0.0.1366.768@0.0.1366.768" timestamp="1607696240207" />
     <state x="501" y="309" width="354" height="141" key="NewPhpFileDialog" timestamp="1607549581434">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

@@ -23,26 +23,36 @@
         </div>
         {{-- user onlie  --}}
         <ul>
-            @for($i=0; $i<4;$i++)
-                <li class ='mb-2 py-2 hover:bg-gray-700  rounded-md '>
-                    <a href="/profile/{{Auth::user()->id}}" class="flex relative px-3 text-gray-300 font-semibold items-center">
-                        @php
-                            $src = pict();
-                        @endphp
-                        <div class="w-6 h-6  mr-3 relative">
-
-                            <img class='rounded-full w-full h-full' src="{{asset('/storage/front/profile/'.$src)}}" alt="">
-                            <span class="w-2 h-2 absolute right-0 bottom-0 bg-green-500"></span>
-                        </div>
-                        {{Auth::user()->name}}
-
-
-                    </a>
-                </li>
-            @endfor
+            @auth           
+                @php             
+                  $user_friends =  actFriends(Auth::user()->id);
+                @endphp
+            @endauth
+            @isset($user_friends)
+         
+                @foreach ($user_friends as $friend)
+                    <li class ='mb-2 py-2 hover:bg-gray-700  rounded-md '>
+                        <a href="/profile/{{$friend->id}}" class="flex relative px-3 text-gray-300 font-semibold items-center">
+                            @php
+                                $src = pict($friend->id);
+                            @endphp
+                            <div class="w-6 h-6  mr-3 relative">
+                                @if($src )
+                                <img class='rounded-full w-full h-full' src="{{asset('/storage/front/profile/'.$src)}}" alt=" {{$friend->name}}">
+    
+                                @else
+                                <img class='rounded-full w-full h-full' src="{{asset('/img/profile/50.png')}}"  alt="{{$friend->name}}">
+                                @endif   
+                                <span class="w-2 h-2 absolute right-0 bottom-0 bg-green-500"></span>
+                            </div>
+                            {{$friend->name}}
+                        </a>
+                    </li>
+                @endforeach
+            @endisset
         </ul>
     {{--  group --}}
-        <ul class="border-t-2 border-gray-700 mt-2 pt-2">
+        {{-- <ul class="border-t-2 border-gray-700 mt-2 pt-2">
             @for($i=0; $i<4;$i++)
                 <li class ='mb-2 py-2 hover:bg-gray-700  rounded-md '>
                     <a href="/profile/{{Auth::user()->id}}" class="flex relative px-3 text-gray-300 font-semibold items-center">
@@ -62,7 +72,7 @@
 
                     </a>
                 </li>
-            @endfor
+            @endfor --}}
         </ul>
     </aside>
 

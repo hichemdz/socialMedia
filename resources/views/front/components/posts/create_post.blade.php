@@ -6,7 +6,7 @@
             @endphp
             <img class='rounded-full w-12 h-12  mr-3' src="{{asset('/storage/front/profile/'.$src)}}" alt="">
         </a>
-        <button class=" cursor-pointer text-md w-full hover:bg-gray-600 bg-gray-700 text-gray-500 font-black p-3 rounded-full block">
+        <button id='open_create_post' class=" cursor-pointer text-md w-full hover:bg-gray-600 bg-gray-700 text-gray-500 font-black p-3 rounded-full block">
                 What's on you mind, <b class="text-gray-400" >{{Auth::user()->name}}</b>?
         </button>
     </div>

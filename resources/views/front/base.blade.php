@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
+    <head>''
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,9 @@
     </head>
     <body class="antialiased bg-gray-900  overflow-y-scroll  max-h-screen" >
 
-       @include('front.header')
+       @section('header')
+        @include('front.header')
+       @show
 
      @section('main')
 
@@ -31,7 +33,14 @@
      @section('content')
 
      @show
+     
+    <div id='file_editor' class="fixed top-0 hidden left-0 flex justify-center items-center w-full h-screen bg-rgba-b-6 z-10">
+        @section('overflay')
+        
+           
 
+        @show
+    </div>
      @section('script')
          <script src="{{asset('js/app.js')}}"></script>
      @show

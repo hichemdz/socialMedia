@@ -6,8 +6,10 @@ use App\Models\Friend;
 use App\Models\Profile;
 use App\Models\PhotoProfile;
 use Illuminate\Http\Request;
+use DB;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreProfileRequest;
 
 
 class ProfileController extends Controller
@@ -40,70 +42,31 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProfileRequest $request)
     {
+        
+    
+        try{
+             
+          $type = $request->type == 'c' ? 'cover/':'photo/';
+          $folder = 'public/front/profile/'.$type;
+          $path =  UploadPhoto($folder,$request->path, $type);
+              
+           PhotoProfile::create([
+               'type' => $request->type ,
+               'profile_id' => $request->profile_id,
+               'path' => $path,
+           ]);
 
-        #mimes:jpeg,jpg,png,gif|required|max:50000
-
-
-
-        // ajax
-        if($request->ajax()) {
-            $input = $request->all();
-            $type = $input['type'] == 'c'?'cover':'profile';
-            //convert
-            $image_pres = explode(';base64,', $input['path']);
-            $ex = explode('image/',$image_pres[0])[1];
-            $input['path'] = $type.'/'.$type.'_'. time().$ex;
-            $image_bas64 = base64_decode($image_pres[1]);
-
-            //validate
-            $request->validate([
-                'path' => 'required:image',
-                'type' => 'required',
-                'profile_id' => 'required',
-            ]);
-
-
-
-            Storage::put('public/front/profile/'. $input['path'],$image_bas64);
-
-            PhotoProfile::create($input);
-
-            if($input['type'] == 'c'){
-                $context = ['cover'=>$input['path']];
-                $template = 'front.profile.include.backgroundCover';
-            }else{
-                $context = ['photo'=>$input['path']];
-                $template = 'front.profile.include.backgroundPhoto';
-            }
-
-            return view($template , $context)->render();
-
+         return back()->with('message','create new  photo');
+            
         }
+        catch(\Exception $ex){
+            DB::rollback();
+            return back()->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+           
 
-//
-//
-//        $file = $request->file('path');
-//
-//        $ext = $file->getClientOriginalExtension();
-//
-//        $request->file('path')->storeAs('public/front/profile/'.$type,$type.'_'. time().'.'.$ext);
-//
-//
-//        $input['path'] = $type.'/'.$type.'_'. time().'.'.$ext;
-//
-//
-//        $u = public_path('storage/front/profile/'. $input['path'] );
-//
-//
-//        //$img = Image::make($u)->resize(911, 351);
-////        $img = Image::make($u) ; //->crop(911, 351);
-////        return dump($img->filesize());
-////        $img->save();
-//        PhotoProfile::create($input);
-//
-//        return back();
     }
 
     /**
@@ -113,9 +76,16 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
+    
+    
+
         $profile =  Profile::find($id); //  data profile
+        
         $id_login = \Auth::user() ?  \Auth::user()->id : null;
+   
+
+
         if(!$profile ){
             return  redirect('profile');
         }

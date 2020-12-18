@@ -1,53 +1,124 @@
 @extends('front.base')
+
+
+
+
+
 @section('main')
    <main class="grid grid-cols-12 pt-14">
-     {{-- cover --}}
-    <div class="relative bg-red-200
-                col-start-1 col-span-12
-                md:col-start-2 md:col-span-10
-                lg:col-start-3 lg:col-span-8"
-                 >
-      {{-- Photo profile --}}
-      <div class="relative w-full cover"
-           id="photo_cover">
-          @include('front.profile.include.backgroundCover')
-      </div>
+         {{-- cover --}}
+        <div class="relative bg-red-200
+                    col-start-1 col-span-12
+                    md:col-start-2 md:col-span-10
+                    lg:col-start-3 lg:col-span-8"
+                        >
+              {{-- Photo profile --}}
+              <div class="relative w-full cover"
+                  id="photo_cover">
+                  @include('front.profile.include.backgroundCover')
+              </div>
 
-      <div class=" w-36 h-36 z-10 m-auto absolute inner_photo_profile z-10 border-4 border-gray-900 rounded-full "
-          id="photo_profile">
-          @include('front.profile.include.backgroundPhoto')
-      </div>
+              <div class=" w-36 h-36  m-auto absolute inner_photo_profile  border-4 border-gray-900 rounded-full "
+                  id="photo_profile">
+                  @include('front.profile.include.backgroundPhoto')
+              </div>
 
-    </div>
-   {{--  information user  --}}
-     <div class="col-start-1 col-span-12 border-b py-2 border-gray-600
-    md:col-start-2 md:col-span-10
-    lg:col-start-3 lg:col-span-8 mt-4 text-white text-center">
-         <h1 class="text-4xl font-black">{{$user->name}}</h1>
-         <p class="mb-1">Back End Developer</p>
-     </div>
-
-    {{--  actions --}}
-    @include('front.profile.include.action')
+        </div>
+       {{--  information user  --}}
+        @include('front/profile/include/description');
+        {{--  actions --}}
+        @include('front.profile.include.action')
   </main>
+
   {{--  inner uploads photos  --}}
-  @include('front.profile.include.main_upload')
+ 
+  @section('overflay')
+    <button class="absolute top-0 right-0 " id='close'>
+        <svg class='fill-current hover:text-red-200 text-white w-5 h-5 mt-3 mr-3' xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>
+        </svg>
+    </button>
+    @include('front.profile.include.main_upload')
+  @endsection
+  {{--  --}}
+
 @endsection
 
 @section('content')
-    <div class="conten bg-gray-900 ">
+    <div class="conten bg-gray-900 pt-4">
 
-        <div class="inner_main m-auto grid grid-cols-3 gap-4">
-            <div class="">
-                {{-- Intro --}}
-                 @include('front.profile.include.content_intro')
+        <div class="inner_mai m-auto  grid grid-cols-12 lg:grid-cols-12 gap-4">
+          {{-- left aside --}}
+            <aside class="col-start-1   col-span-12 lg:col-start-3 lg:col-span-3 md:col-start-2 md:col-span-10">
+                <div class="0">
+                  {{-- Intro --}}
+                <div class="bg-sub  p-4 mb-2 rounded">
+                    @include('front.profile.include.content_intro')
+                 </div>
                 {{-- Phots --}}
+                <div class="bg-sub p-3 mb-2 w-full rounded">
+    
                  @include('front.profile.include.content_photo')
+                </div>
                 {{-- friends --}}
-                @include('front.profile.include.content_friends')
+                <div class="bg-sub p-3 rounded ">
 
+                    @include('front.profile.include.content_friends')
+                </div>
+                </div>
+            </aside>
+            {{-- All profile Posts--}}
+            <div class="bg-red col-start-1 col-span-12  md:col-start-2 md:col-span-10 lg:col-span-5">
+
+               @foreach ($errors->all() as $message)
+                    {{$message}}
+               @endforeach
+               
+               
+
+               
+                 
+                    
+                 
+
+
+
+
+                  @isset($profile->user->posts) 
+
+                     @auth
+                        
+                          @php  
+                              $id =  isFriends( Auth::id() ,$profile->user->id ) 
+                          @endphp
+                      
+                     @endauth 
+
+                      @foreach ($profile->user->posts as $post)
+                          
+                          @if($post->privacy  === 'Public')
+
+                            @include('front.components.posts.post')
+
+                          @else  
+
+                               @auth
+                                    @if(Auth::id() === $profile->id 
+                                       || $post->privacy  === 'Friends' 
+                                       &&  $id )
+                                           @include('front.components.posts.post')
+                                    @endif
+                               @endauth 
+
+                          @endif
+                        
+                      @endforeach {{-- posts loop  --}}
+                  @endisset {{-- if have posts --}}
+
+              
+              
             </div>
-            <div class="bg-sub col-span-2">2i</div>
 
         </div>
 
@@ -67,5 +138,5 @@
 
 @section('script')
     @parent
-    <script src="{{asset('js/profile.js')}}"></script>
+    {{-- <script src="{{asset('js/profile.js')}}"></script> --}}
 @endsection

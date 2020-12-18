@@ -63,8 +63,22 @@ class User extends Authenticatable
 
     public function profile()
     {
-        return $this->hasOne('App\Models\Profile' );
+        return $this->hasOne('App\Models\Profile');
     }
+
+    public function friends()
+    {   
+         
+         return $this->hasMany('App\Models\Friend','user_send','id','user_request','id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    
+    }
+
+    
 
 
  

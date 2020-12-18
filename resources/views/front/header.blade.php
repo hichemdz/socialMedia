@@ -1,4 +1,4 @@
-<header class="fixed top-0 z-10 left-0 w-full border-b-2 border-gray-800">
+<header class="fixed top-0 z-50 left-0 w-full border-b-2 border-gray-800">
     <nav class="bg-gray-900 text-white">
         <div class="px-4 py-2 flex m-auto items-center justify-between ">
             <div class="flex bg-red-00 sm:w-1/2">
@@ -18,7 +18,7 @@
                     <input type="search" id='search' class="hidden md:block bg-transparent w-full py-2 px-2" placeholder="Search in Facebook">
 
                 </form>
-                <button>
+                <button class="block md:hidden ml-2">
                     <svg class="w-8 h-8 fill-current text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <defs/>
                         <path fill="none" d="M0 0h24v24H0z"/>
@@ -76,9 +76,6 @@
 
                     </a>
                 </li>
-
-
-
                 @endif
 
                 <li class='mx-2' ><a href="">
@@ -106,7 +103,7 @@
                     </a>
                 </li>
 
-                <li class='mx-2' ><a href="">
+                <li id='openOption' class='mx-2' ><a href="/">
 
                     <svg height="28" width="28" class="w-4 fill-current text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612.004 612.004">
                         <defs/>
@@ -116,6 +113,117 @@
                     </a>
                 </li>
             </ul>
+
+            <div class="option hidden bg-gray-800 absolute right-0 w-1/5">
+           
+
+                {{--  --}}
+                   <ul  class="flex flex-col w-full p-2">
+           
+                         @auth
+                            <li class="flex justify border-b border-gray-600 items-center  w-full  p-4 mb-1">
+                            
+                            @php
+                                $src = pict();
+                            @endphp
+                            <img class='rounded-full w-12 h-12 mr-2' src="{{asset('/storage/front/profile/'.$src)}}" alt="">
+                            <div>
+                                <span class="ml-1 font-black text-md leading-3  block">{{Auth::user()->name}}</span>
+                                <p class="ml-1 text-xs ">See your profile </p>
+                            </div>            
+                        </li>
+                    
+                      @endif
+                      
+                          <li class="flex justify items-start border-b border-gray-600  w-full  p-4 mb-3">
+                            <svg class="w-64 rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1"  
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0z"/>
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            <div>
+                                <span class="ml-1 font-black text-md leading-3  block">Gave Feedback</span>
+                                <p class="ml-1 text-xs ">Help us inprove new facebook </p>
+                            </div>            
+                        </li>
+                        {{-- anyone --}}
+                        <li class="flex justify relative items-center rounded-lg w-full bg-gray-60 px-3 py-2 mb-2">
+                            <svg class="w-64 rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1"  
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0z"/>
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            
+                            <span class="ml-1 font-black text-md leading-3  block">Setting & Privacy</span>
+                             
+                             <span class="absolute right-0 px-5 font-black"> > </span> 
+                                
+                        </li>
+                        
+                        {{-- Friends --}}
+                        <li class="flex  rounded-lg items-center relative w-full bg-gray-60 px-3 py-2 mb-2">
+                        
+                            <svg class=" rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0z"/>
+                                <path fill-rule="evenodd" d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h4v-3c0-2.18-3.57-3.47-6.33-3.87z"/>
+                                <circle cx="9" cy="8" r="4" fill-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24C14.5 5.27 15 6.58 15 8s-.5 2.73-1.33 3.76c.42.14.86.24 1.33.24zM9 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <span class="ml-1 font-black text-md leading-3  block">Help & Supoprt</span>
+                             
+                             <span class="absolute right-0 px-5 font-black"> > </span>            
+                        </li>
+            
+                        {{-- nonely --}}
+                        <li class="flex justify relative rounded-lg items-center w-full bg-gray-60 px-3 py-2 mb-2">
+                            <svg class=" rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"/>
+                                <path d="M8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2h-4.66L20 17.56V8h-3V6.22c0-2.61-1.91-4.94-4.51-5.19-2.53-.25-4.72 1.41-5.32 3.7L8.9 6.46V6zM4.41 4.81L3 6.22 4.78 8H4v14h14.78l1 1 1.41-1.41z"/>
+                            </svg>
+                            
+                            <span class="ml-1 font-black text-md leading-3  block">Display & Accessbility</span>
+                             
+                             <span class="absolute right-0 px-5 font-black"> > </span>           
+                        </li> 
+                        {{-- lang  --}}
+                        <a href='/ar' class="flex justify relative rounded-lg items-center w-full bg-gray-60 px-3 py-2 mb-2">
+                            <svg class=" rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"/>
+                                <path d="M8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2h-4.66L20 17.56V8h-3V6.22c0-2.61-1.91-4.94-4.51-5.19-2.53-.25-4.72 1.41-5.32 3.7L8.9 6.46V6zM4.41 4.81L3 6.22 4.78 8H4v14h14.78l1 1 1.41-1.41z"/>
+                            </svg>
+                            
+                            <span class="ml-1 font-black text-md leading-3  block">Arabic</span>
+                             
+                             <span class="absolute right-0 px-5 font-black"> > </span>           
+                        </a> 
+
+                        {{-- lang --}}
+
+                        <li class="flex justify relative rounded-lg items-center w-full bg-gray-60 px-3 py-2 mb-2">
+                            <svg class=" rounded-full mr-1 bg-gray-700 fill-current text-gray-200 p-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <defs/>
+                                <path fill="none" d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"/>
+                                <path d="M8.9 6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2h-4.66L20 17.56V8h-3V6.22c0-2.61-1.91-4.94-4.51-5.19-2.53-.25-4.72 1.41-5.32 3.7L8.9 6.46V6zM4.41 4.81L3 6.22 4.78 8H4v14h14.78l1 1 1.41-1.41z"/>
+                            </svg>
+                            
+                            <form action="/logout" method="POST">
+                               @csrf
+                            <button  class="ml-1 font-black text-md leading-3" type="submit">Logout</button>
+                            </form>
+                           
+                             
+                                      
+                        </li> 
+
+                   </ul>
+                    {{--  --}}
+
+            </div>
         </div>
     </nav>
 </header>
